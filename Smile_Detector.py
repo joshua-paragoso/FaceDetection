@@ -96,6 +96,13 @@ while True:
             # last argument is the tickness of rectangle
             cv2.rectangle(the_face, (x_smile, y_smile), (x_smile + w_smile, y_smile + h_smile), (50, 50, 200), 4)
 
+            #putting text for detecting smiles
+            # if length of smiles is greater than 0
+            # display text for smile
+            if len(smiles) > 0:
+                cv2.putText(frame, 'smiling', (x, y+h+40), fontScale=3,
+                fontFace=cv2.FONT_HERSHEY_PLAIN, color=(255, 255, 255))
+
     #name of window
     # show image to screen
     cv2.imshow('Smile detector', frame)
