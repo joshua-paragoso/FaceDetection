@@ -12,6 +12,12 @@ webcam = cv2.VideoCapture(0)
 #after getting webcam variable
 while True:
 
+#read current frame from webcam
+#returns a tuple
+#1st element 'successful_frame' is a boolan
+#2nd element is the actual frame that the image runs on
+#webcam.read is reading from the webcam
+#.read - reads a single webframe
     succesful_frame_read, frame = webcam.read()
 
 # #name of window
