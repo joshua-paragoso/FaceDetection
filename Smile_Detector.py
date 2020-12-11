@@ -21,7 +21,7 @@ while True:
 # # keeps webcam open till key is pressed
 # # stays on with real time
 # # display
-    cv2.waitKey()
+    cv2.waitKey(1)
 
 # # release webcam
 # # let OS know the app is done with webcam
