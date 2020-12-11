@@ -63,8 +63,12 @@ while True:
         # last argument is the tickness of rectangle
         cv2.rectangle(frame, (x, y), (x+w, y+h), (100, 200, 50), 4)
 
-        # the actual face in the box inside the frame
-        the_face = (x, y, w, h)
+        # using slicing to get image
+        # get the whole frame
+        # x and y
+        # get the sub frame using numpy N-dimensional array slicing
+        the_face = frame[y:y+h, x:x+w]
+
 
         #change to grayscale
         # reduces the amount of processing in the video cam
@@ -90,7 +94,7 @@ while True:
             # all you need is the top left and bottom right points
             # four numbers are color of rectangle
             # last argument is the tickness of rectangle
-            cv2.rectangle(frame, (x_smile, y_smile), (x_smile+w_smile, y_smile+h_smile), (50, 50, 200), 4)
+            cv2.rectangle(the_face, (x_smile, y_smile), (x_smile + w_smile, y_smile + h_smile), (50, 50, 200), 4)
 
     #name of window
     # show image to screen
