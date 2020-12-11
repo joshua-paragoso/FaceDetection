@@ -8,16 +8,17 @@ face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 #grab webcam feed
 webcam = cv2.VideoCapture(0)
+
 #shows the current frame
 #after getting webcam variable
 while True:
 
-#read current frame from webcam
-#returns a tuple
-#1st element 'successful_frame' is a boolan
-#2nd element is the actual frame that the image runs on
-#webcam.read is reading from the webcam
-#.read - reads a single webframe
+    #read current frame from webcam
+    #returns a tuple
+    #1st element 'successful_frame' is a boolan
+    #2nd element is the actual frame that the image runs on
+    #webcam.read is reading from the webcam
+    #.read - reads a single webframe
     succesful_frame_read, frame = webcam.read()
     
     #if there is an error, abort
@@ -39,13 +40,31 @@ while True:
     faces = face_detector.detectMultiScale(frame_grayscale, 1.3, 5)
     
     # print out face locations
-    print(faces)
+    # print(faces)
+
+    # run smmile detection within each of those faces
+    # iterate through all the points
+    # for each face
+    # x - x coordinate
+    # y - y coordinate, top left point of face
+    # w - width of rectangle
+    # h - height of rectangle top right point of face
+    for( x, y, w, h) in faces: ()
+
+        #draw a rectangle around the face
+        # cv2 allows you to draw rectangles
+        # give it a image (frame)
+        # all you need is the top left and bottom right points
+        # four numbers are color of rectangle
+        # last argument is the tickness of rectangle
+    cv2.rectangle(frame, (x, y), (x+w, y+h), (100, 200, 50), 4)
+
     #name of window
     # show image to screen
-    # cv2.imshow('Smile detector', frame)
+    cv2.imshow('Smile detector', frame)
 
     #shows gray scale
-    cv2.imshow('Smile detector', frame_grayscale)
+    # cv2.imshow('Smile detector', frame_grayscale)
 
 # # keeps webcam open till key is pressed
 # # stays on with real time
