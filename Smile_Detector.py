@@ -37,6 +37,9 @@ while True:
     # show image to screen
     cv2.imshow('Smile detector', frame)
 
+    #shows gray scale
+    # cv2.imshow('Smile detector', frame_grayscale)
+
 # # keeps webcam open till key is pressed
 # # stays on with real time
 # # display
