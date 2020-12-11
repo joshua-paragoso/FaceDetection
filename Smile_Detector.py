@@ -41,12 +41,7 @@ while True:
     # calls detectMultiScale - tells us where faces are
     # returns an array of points (rectangles)
     # detect faces of every scale
-    # faces = face_detector.detectMultiScale(frame_grayscale, 1.3, 5)
-    
-    # detects smiles
-    # sclars how much you wanna bliur the image
-    # optimze to easily detect teeth
-    smiles = smile_detector.detectMultiScale(frame_grayscale, scaleFactor=1.7, minNeighbors=20)
+    faces = face_detector.detectMultiScale(frame_grayscale, 1.3, 5)
 
     # print out face locations
     # print(faces)
@@ -58,19 +53,7 @@ while True:
     # y - y coordinate, top left point of face
     # w - width of rectangle
     # h - height of rectangle top right point of face
-    # for( x, y, w, h) in faces:
-
-    #     #draw a rectangle around the face
-    #     # cv2 allows you to draw rectangles
-    #     # give it a image (frame)
-    #     # all you need is the top left and bottom right points
-    #     # four numbers are color of rectangle
-    #     # last argument is the tickness of rectangle
-        # cv2.rectangle(frame, (x, y), (x+w, y+h), (100, 200, 50), 4)
-
-
-    #for smiles--------------------------
-    for(x, y, w, h) in smiles:
+    for( x, y, w, h) in faces:
 
         #draw a rectangle around the face
         # cv2 allows you to draw rectangles
@@ -78,8 +61,36 @@ while True:
         # all you need is the top left and bottom right points
         # four numbers are color of rectangle
         # last argument is the tickness of rectangle
-     cv2.rectangle(frame, (x, y), (x+w, y+h), (50, 50, 200), 4)
-    #-------------------------------------------------------
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (100, 200, 50), 4)
+
+        # the actual face in the box inside the frame
+        the_face = (x, y, w, h)
+
+        #change to grayscale
+        # reduces the amount of processing in the video cam
+        # which helps define a face
+        # cvtColor - convert color to black and white
+        # chang the color to grey
+        # RGB to grey
+        face_grayscale = cv2.cvtColor(the_face, cv2.COLOR_BGR2GRAY)
+        
+        # detects smiles
+        # sclars how much you wanna bliur the image
+        # optimze to easily detect teeth
+        smiles = smile_detector.detectMultiScale(face_grayscale, scaleFactor=1.7, minNeighbors=20)
+        
+        # nested loop to find the smiles
+        # look over the face
+        # find all the smiles in the face
+        for( x_smile, y_smile, w_smile, h_smile) in smiles:
+
+            #draw a rectangle around the face
+            # cv2 allows you to draw rectangles
+            # give it a image (frame)
+            # all you need is the top left and bottom right points
+            # four numbers are color of rectangle
+            # last argument is the tickness of rectangle
+            cv2.rectangle(frame, (x_smile, y_smile), (x_smile+w_smile, y_smile+h_smile), (50, 50, 200), 4)
 
     #name of window
     # show image to screen
