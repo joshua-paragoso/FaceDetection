@@ -6,6 +6,10 @@ import cv2
 # finds faces to find smile
 face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
+# smile classifier
+smile_detector = cv2.CascadeClassifier('haarcascade_smile.xml')
+
+# why smile detector wont work by itself - face_detector because it ran with more data
 #grab webcam feed
 webcam = cv2.VideoCapture(0)
 
@@ -37,8 +41,13 @@ while True:
     # calls detectMultiScale - tells us where faces are
     # returns an array of points (rectangles)
     # detect faces of every scale
-    faces = face_detector.detectMultiScale(frame_grayscale, 1.3, 5)
+    # faces = face_detector.detectMultiScale(frame_grayscale, 1.3, 5)
     
+    # detects smiles
+    # sclars how much you wanna bliur the image
+    # optimze to easily detect teeth
+    smiles = smile_detector.detectMultiScale(frame_grayscale, scaleFactor=1.7, minNeighbors=20)
+
     # print out face locations
     # print(faces)
 
@@ -49,7 +58,19 @@ while True:
     # y - y coordinate, top left point of face
     # w - width of rectangle
     # h - height of rectangle top right point of face
-    for( x, y, w, h) in faces: ()
+    # for( x, y, w, h) in faces:
+
+    #     #draw a rectangle around the face
+    #     # cv2 allows you to draw rectangles
+    #     # give it a image (frame)
+    #     # all you need is the top left and bottom right points
+    #     # four numbers are color of rectangle
+    #     # last argument is the tickness of rectangle
+        # cv2.rectangle(frame, (x, y), (x+w, y+h), (100, 200, 50), 4)
+
+
+    #for smiles--------------------------
+    for(x, y, w, h) in smiles:
 
         #draw a rectangle around the face
         # cv2 allows you to draw rectangles
@@ -57,7 +78,8 @@ while True:
         # all you need is the top left and bottom right points
         # four numbers are color of rectangle
         # last argument is the tickness of rectangle
-    cv2.rectangle(frame, (x, y), (x+w, y+h), (100, 200, 50), 4)
+     cv2.rectangle(frame, (x, y), (x+w, y+h), (50, 50, 200), 4)
+    #-------------------------------------------------------
 
     #name of window
     # show image to screen
