@@ -32,13 +32,20 @@ while True:
     # RGB to grey
     frame_grayscale = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
-
+    # detects face first
+    # calls detectMultiScale - tells us where faces are
+    # returns an array of points (rectangles)
+    # detect faces of every scale
+    faces = face_detector.detectMultiScale(frame_grayscale, 1.3, 5)
+    
+    # print out face locations
+    print(faces)
     #name of window
     # show image to screen
-    cv2.imshow('Smile detector', frame)
+    # cv2.imshow('Smile detector', frame)
 
     #shows gray scale
-    # cv2.imshow('Smile detector', frame_grayscale)
+    cv2.imshow('Smile detector', frame_grayscale)
 
 # # keeps webcam open till key is pressed
 # # stays on with real time
