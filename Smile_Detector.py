@@ -19,9 +19,22 @@ while True:
 #webcam.read is reading from the webcam
 #.read - reads a single webframe
     succesful_frame_read, frame = webcam.read()
+    
+    #if there is an error, abort
+    if not succesful_frame_read:
+        break
 
-# #name of window
-# # show image to screen
+    #change to grayscale
+    # reduces the amount of processing in the video cam
+    # which helps define a face
+    # cvtColor - convert color to black and white
+    # chang the color to grey
+    # RGB to grey
+    frame_grayscale = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    
+
+    #name of window
+    # show image to screen
     cv2.imshow('Smile detector', frame)
 
 # # keeps webcam open till key is pressed
