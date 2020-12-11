@@ -10,26 +10,26 @@ face_detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 smile_detector = cv2.CascadeClassifier('haarcascade_smile.xml')
 
 # why smile detector wont work by itself - face_detector because it ran with more data
-#grab webcam feed
+# grab webcam feed
 webcam = cv2.VideoCapture(0)
 
-#shows the current frame
-#after getting webcam variable
+# shows the current frame
+# after getting webcam variable
 while True:
 
-    #read current frame from webcam
-    #returns a tuple
-    #1st element 'successful_frame' is a boolan
-    #2nd element is the actual frame that the image runs on
-    #webcam.read is reading from the webcam
-    #.read - reads a single webframe
+    # read current frame from webcam
+    # returns a tuple
+    # 1st element 'successful_frame' is a boolan
+    # 2nd element is the actual frame that the image runs on
+    # webcam.read is reading from the webcam
+    # .read - reads a single webframe
     succesful_frame_read, frame = webcam.read()
     
-    #if there is an error, abort
+    # if there is an error, abort
     if not succesful_frame_read:
         break
 
-    #change to grayscale
+    # change to grayscale
     # reduces the amount of processing in the video cam
     # which helps define a face
     # cvtColor - convert color to black and white
@@ -55,7 +55,7 @@ while True:
     # h - height of rectangle top right point of face
     for( x, y, w, h) in faces:
 
-        #draw a rectangle around the face
+        # draw a rectangle around the face
         # cv2 allows you to draw rectangles
         # give it a image (frame)
         # all you need is the top left and bottom right points
@@ -70,7 +70,7 @@ while True:
         the_face = frame[y:y+h, x:x+w]
 
 
-        #change to grayscale
+        # change to grayscale
         # reduces the amount of processing in the video cam
         # which helps define a face
         # cvtColor - convert color to black and white
@@ -88,7 +88,7 @@ while True:
         # find all the smiles in the face
         for( x_smile, y_smile, w_smile, h_smile) in smiles:
 
-            #draw a rectangle around the face
+            # draw a rectangle around the face
             # cv2 allows you to draw rectangles
             # give it a image (frame)
             # all you need is the top left and bottom right points
@@ -96,30 +96,30 @@ while True:
             # last argument is the tickness of rectangle
             cv2.rectangle(the_face, (x_smile, y_smile), (x_smile + w_smile, y_smile + h_smile), (50, 50, 200), 4)
 
-            #putting text for detecting smiles
+            # putting text for detecting smiles
             # if length of smiles is greater than 0
             # display text for smile
             if len(smiles) > 0:
                 cv2.putText(frame, 'smiling', (x, y+h+40), fontScale=3,
                 fontFace=cv2.FONT_HERSHEY_PLAIN, color=(255, 255, 255))
 
-    #name of window
+    # name of window
     # show image to screen
     cv2.imshow('Smile detector', frame)
 
-    #shows gray scale
+    # shows gray scale
     # cv2.imshow('Smile detector', frame_grayscale)
 
-# # keeps webcam open till key is pressed
-# # stays on with real time
-# # display
+    # keeps webcam open till key is pressed
+    # stays on with real time
+    # display
     cv2.waitKey(1)
 
-# # release webcam
-# # let OS know the app is done with webcam
+# release webcam
+# let OS know the app is done with webcam
 webcam.release()
 
-# # closes all windows
+# closes all windows
 cv2.destroyAllWindows()
 
 print("code complete")
